@@ -13,7 +13,13 @@ const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING ||
   "mongodb://127.0.0.1:27017/kanbas?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.1";
 
-mongoose.connect(CONNECTION_STRING);
+try {
+  mongoose.connect(CONNECTION_STRING);
+  console.log("Connected to MongoDB");
+} catch (error) {
+  console.log(error);
+}
+
 const app = express();
 app.use(
   cors({
